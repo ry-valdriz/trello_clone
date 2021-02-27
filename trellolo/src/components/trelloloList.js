@@ -1,21 +1,24 @@
 import React from "react";
 import TrelloloCard from './trelloloCard';
 
-const TrelloloList = ({title}) => {
+const TrelloloList = ({title, cards}) => {
     return (
         <div style= {styles.container}>
             <h4>{title}</h4>
-            <TrelloloCard/>
+            {cards.map(card => ( 
+                <TrelloloCard text = {card.text} />
+            ))}
         </div>
     )
 };
 
 const styles ={
     container: {
-        backgroundColor: "#ccc",
+        backgroundColor: "#dfe3e6",
         borderRadius: 10,
         width: 300,
-        padding: 5,
+        padding: 8,
+        marginRight: 8,
     }
 }
 
