@@ -2,7 +2,7 @@ import React from "react";
 import TrelloloCard from './trelloloCard';
 import ActionButton from './actionButton';
 
-const TrelloloList = ({title, cards}) => {
+const TrelloloList = ({title, cards, listID}) => {
     console.log('cards: ', cards)
     return (
         <div style= {styles.container}>
@@ -10,7 +10,7 @@ const TrelloloList = ({title, cards}) => {
             {cards.map(card => ( 
                 <TrelloloCard key = {card.id} text = {card.text} />
             ))}
-            <ActionButton />
+            <ActionButton listID = {listID} />
         </div>
     )
 };

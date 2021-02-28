@@ -3,6 +3,8 @@ import Icon from '@material-ui/core/Icon';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
+import {connect} from 'react-redux';
+import {addList, addCard} from '../actions/';
 
 class ActionButton extends React.Component{ //using class because we have to store some state
     state = {
@@ -26,6 +28,33 @@ class ActionButton extends React.Component{ //using class because we have to sto
         this.setState({
             text: e.target.value,
         })
+    };
+
+    handleAddList = () => {
+        const {dispatch} = this.props;
+        const {text} = this.state;
+
+        if(text){
+            this.setState({
+                text: "",   
+            });
+            dispatch(addList(text))
+        }
+        else{
+            return;
+        }
+    };
+
+    handleAddCard = () => {
+        const {dispatch, listID} = this.props;
+        const {text} = this.state;
+
+        if(text) {
+            this.setState({
+                text: "",   
+            });
+            dispatch(addCard(listID, text))
+        }
     }
     
     renderAddButton = () => {
@@ -79,6 +108,7 @@ class ActionButton extends React.Component{ //using class because we have to sto
                 </Card>
                 <div style = {styles.formButtonGroup}>
                     <Button 
+                        onMouseDown = {list ? this.handleAddList : this.handleAddCard} //onMouseDown runs before onBlur function, as opposed to onClick()
                         variant = 'contained' 
                         style = {{color: 'white', backgroundColor: '#5aac44'}}
                     >
@@ -113,4 +143,4 @@ const styles = {
 }
 
 
-export default ActionButton;
+export default connect() (ActionButton);
